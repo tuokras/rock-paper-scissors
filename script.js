@@ -1,6 +1,6 @@
 function getComputerChoice() {
     value = Math.random() * 3;
-    console.log(value);
+    //console.log(value);
     if (value <= 1) {
         return "Rock";
     } else if (value > 2) {
@@ -17,6 +17,12 @@ function playRound(playerSelection, computerSelection) {
     console.log("Computer selection: " + computerSelection);
 
     let playerWins = false;
+
+    if (!(playerSelection === "rock" ||
+        playerSelection === "paper" ||
+        playerSelection === "scissors")) {
+        return "Invalid entry";
+    }
 
     if (playerSelection === computerSelection) {
         return "Draw!";
