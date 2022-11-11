@@ -10,13 +10,44 @@ function getComputerChoice() {
     }
 }
 
+function checkPlayerWin(playerSelection, computerSelection) {
+
+    switch (computerSelection) {
+        case "rock":
+
+            if (playerSelection === "paper") {
+                return true;
+            }
+
+            break;
+
+        case "paper":
+
+            if (playerSelection === "scissors") {
+                return true;
+            }
+
+            break;
+
+        case "scissors":
+
+            if (playerSelection === "rock") {
+                return true;
+            }
+
+            break;
+
+        default:
+            return false;
+
+    }
+}
+
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     console.log("Player selection: " + playerSelection);
     console.log("Computer selection: " + computerSelection);
-
-    let playerWins = false;
 
     if (!(playerSelection === "rock" ||
         playerSelection === "paper" ||
@@ -26,42 +57,17 @@ function playRound(playerSelection, computerSelection) {
 
     if (playerSelection === computerSelection) {
         return "Draw!";
+    }
+
+    let playerWins = checkPlayerWin(playerSelection, computerSelection)
+
+    if (playerWins) {
+        return ("You win! " + playerSelection.slice(0, 1).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection);
     } else {
-
-        switch (computerSelection) {
-            case "rock":
-
-                if (playerSelection === "paper") {
-                    playerWins = true;
-                }
-
-                break;
-
-            case "paper":
-
-                if (playerSelection === "scissors") {
-                    playerWins = true;
-                }
-
-                break;
-
-            case "scissors":
-
-                if (playerSelection === "rock") {
-                    playerWins = true;
-                }
-
-                break;
-
-        }
-
-        if (playerWins) {
-            return ("You win! " + playerSelection.slice(0, 1).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection);
-        } else {
-            return ("You lose! " + computerSelection.slice(0, 1).toUpperCase() + computerSelection.slice(1) + " beats " + playerSelection);
-        }
+        return ("You lose! " + computerSelection.slice(0, 1).toUpperCase() + computerSelection.slice(1) + " beats " + playerSelection);
     }
 }
+
 
 function game() {
     let playerSelection;
